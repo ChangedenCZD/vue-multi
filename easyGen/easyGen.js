@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const FileUtils = require('../utils/FileUtils');
 const START_TIME = Date.now();
