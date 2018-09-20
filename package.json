@@ -1,9 +1,11 @@
 {
-  "name": "vue-multi",
+  "name": "{{name}}",
   "version": "0.1.0",
   "private": true,
-  "author": "{{author}}",
-  "description": "{{description}}",
+  "author": {
+    "name": "changeden"
+  },
+  "description": "基于vue-cli 3.0的多页面项目模板",
   "scripts": {
     "serve": "vue-cli-service serve --port=8080",
     "build": "vue-cli-service build",
