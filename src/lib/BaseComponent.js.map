@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseComponent.js","sourceRoot":"","sources":["BaseComponent.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,kBAAkB,CAAC;AAE1C,MAAM,CAAC,OAAO,OAAO,SAAU,SAAQ,UAAU;IAC/C;QACE,KAAK,EAAE,CAAC;QACR,IAAI,CAAC,aAAa,CAAC,iBAAiB,CAAC,CAAC;IACxC,CAAC;CACF"}
