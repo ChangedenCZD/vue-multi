@@ -5,9 +5,9 @@
 ![GitHub issues](https://img.shields.io/github/issues/ChangedenCZD/vue-multi.svg)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ChangedenCZD/vue-multi.svg)
 
-## Cli
-[Github](https://github.com/ChangedenCZD/vue-multi-cli)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Npm](https://www.npmjs.com/package/vue-multi-cli)
+## vue-multi-cli
+[Source Code](https://github.com/ChangedenCZD/vue-multi-cli)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NPM](https://www.npmjs.com/package/vue-multi-cli)
 
 ## Project setup
 ```
@@ -29,3 +29,9 @@ yarn run build
 ```
 yarn run lint
 ```
+
+##
+[github](https://github.com/ChangedenCZD/vue-multi)
+[issues](https://github.com/ChangedenCZD/vue-multi/issues)
+
+[e-mail: changeden520@gmail.com]()
