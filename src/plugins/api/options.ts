@@ -49,12 +49,6 @@ export default class Api {
   request(): Promise<any> {
     const self: Api = this;
     const options = self.options;
-    const params = options.params || {};
-    const paramsKV: Array<string> = [];
-    Object.keys(params).forEach((k: string) => {
-      paramsKV.push(`${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`);
-    });
-    console.log(paramsKV.join('&'));
     return new Promise((resolve, reject) => {
       axios.request(options).then(response => {
         // if (response.status < 400) {

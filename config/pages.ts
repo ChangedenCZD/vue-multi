@@ -12,7 +12,7 @@ const pages: any = {};
 class Page {
   entry: string;
   template: string = 'public/index.html';
-  title: string;
+  title: any;
   filename: string;
   chunks: Array<string>;
   moduleInfo: any;
@@ -26,11 +26,16 @@ class Page {
       file: moduleFile,
       parent: parentDirPath
     };
+    this.title = {
+      a: title,
+      b: new Date().toLocaleString()
+    };
   }
 }
 
 FileUtils.rm(moduleTemporaryFolder.endsWith('/') ? moduleTemporaryFolder.substr(0, moduleTemporaryFolder.length - 1) : moduleTemporaryFolder);
 FileUtils.mkdir(moduleTemporaryFolder);
+
 configFile.forEach((filePath: string) => {
   const config = require(filePath);
   let entry: string = config['redirect-url'];
@@ -46,4 +51,5 @@ configFile.forEach((filePath: string) => {
   writer.writeEntry(entryFile, key);
   pages[entry] = new Page(entry, entryFile, title, moduleFile, parentDirPath);
 });
+
 module.exports = pages;

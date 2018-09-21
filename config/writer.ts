@@ -1,20 +1,34 @@
 const path = require('path');
 const FileUtils = require('../utils/FileUtils');
 const env = require('./env');
-const MODULE_TEMPLATE = env.MODULE_TEMPLATE; // path.resolve(__dirname, '../src/.template/') + '/';
+// const MODULE_TEMPLATE = env.MODULE_TEMPLATE;
 const SINGLE = '\'';
 const DOUBLE = '\"';
+const TEMPLATE = `<template>
+  $template
+</template>
+
+<script>
+  $script
+</script>
+
+<style lang="scss" scoped="true">
+  $style
+</style>`;
+
 const readModuleFile = (filePath: string, ext: string) => {
   const file: string = `${filePath}module.${ext}`;
   const content = FileUtils.read(file).split('\n') || [];
   return content.join(`
 `) || '';
 };
+
 const writeFile = (filePath: string, content: string) => {
   FileUtils.write(filePath, content);
 };
+
 const writeModuleFile = (moduleFile: string, parentDirPath: string) => {
-  const lines = readModuleFile(MODULE_TEMPLATE, 'vue')
+  const lines = TEMPLATE// readModuleFile(MODULE_TEMPLATE, 'vue')
     .replace(/(\$template)/g, readModuleFile(parentDirPath, 'vue'))
     .replace(/(\$script)/g, readModuleFile(parentDirPath, 'js'))
     .replace(/(\$style)/g, readModuleFile(parentDirPath, 'scss'))
@@ -37,12 +51,14 @@ const writeModuleFile = (moduleFile: string, parentDirPath: string) => {
   });
   writeFile(moduleFile, lines.join('\r\n'));
 };
+
 const writeEntryContent = (entryFile: string, key: string) => {
   writeFile(entryFile, `// ${new Date()}
 import App from '../../main';
 import Module from './${key}.vue'
 App(Module);`);
 };
+
 module.exports = {
   writeModule: writeModuleFile,
   writeEntry: writeEntryContent
