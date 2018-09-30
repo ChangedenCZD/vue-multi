@@ -11,7 +11,6 @@ const mkdir = (filePath) => {
 };
 const rm = (filePath) => {
     shell.rm('-rf', filePath);
-    console.log(filePath);
 };
 const isExist = (filePath) => fs.existsSync(filePath);
 module.exports = {

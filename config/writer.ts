@@ -30,7 +30,7 @@ const writeFile = (filePath: string, content: string) => {
 const writeModuleFile = (moduleFile: string, parentDirPath: string) => {
   const lines = TEMPLATE// readModuleFile(MODULE_TEMPLATE, 'vue')
     .replace(/(\$template)/g, readModuleFile(parentDirPath, 'vue'))
-    .replace(/(\$script)/g, readModuleFile(parentDirPath, 'js'))
+    .replace(/(\$script)/g, readModuleFile(parentDirPath, 'ts'))
     .replace(/(\$style)/g, readModuleFile(parentDirPath, 'scss'))
     .split('\r\n');
   lines.forEach((line: string, index: number) => {

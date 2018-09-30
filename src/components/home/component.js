@@ -15,7 +15,7 @@ class Component extends BaseComponent {
     }
     getData() {
         return {
-            title: '首页'
+            title: 'Home 首页'
         };
     }
     onCreate() {

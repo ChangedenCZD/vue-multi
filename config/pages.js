@@ -20,6 +20,10 @@ class Page {
             file: moduleFile,
             parent: parentDirPath
         };
+        this.title = {
+            a: title,
+            b: new Date().toLocaleString()
+        };
     }
 }
 FileUtils.rm(moduleTemporaryFolder.endsWith('/') ? moduleTemporaryFolder.substr(0, moduleTemporaryFolder.length - 1) : moduleTemporaryFolder);

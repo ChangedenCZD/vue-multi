@@ -32,6 +32,8 @@ project
 ####Src
 ```
 src
+└───.components                         --- project runtime temporary folder
+|
 └───.modules                            --- project runtime temporary folder
 |       └───development
 |       └───production
@@ -49,6 +51,7 @@ src
 |       └───index                       --- component demo
 |               |   component.ts
 |               |   component.vue
+|               |   component.scss
 |               |   index.ts
 |   
 └───lib                                 --- base class folder

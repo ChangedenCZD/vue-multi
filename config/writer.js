@@ -2,9 +2,20 @@
 const path = require('path');
 const FileUtils = require('../utils/FileUtils');
 const env = require('./env');
-const MODULE_TEMPLATE = env.MODULE_TEMPLATE; // path.resolve(__dirname, '../src/.template/') + '/';
+// const MODULE_TEMPLATE = env.MODULE_TEMPLATE;
 const SINGLE = '\'';
 const DOUBLE = '\"';
+const TEMPLATE = `<template>
+  $template
+</template>
+
+<script>
+  $script
+</script>
+
+<style lang="scss" scoped="true">
+  $style
+</style>`;
 const readModuleFile = (filePath, ext) => {
     const file = `${filePath}module.${ext}`;
     const content = FileUtils.read(file).split('\n') || [];
@@ -15,9 +26,9 @@ const writeFile = (filePath, content) => {
     FileUtils.write(filePath, content);
 };
 const writeModuleFile = (moduleFile, parentDirPath) => {
-    const lines = readModuleFile(MODULE_TEMPLATE, 'vue')
+    const lines = TEMPLATE // readModuleFile(MODULE_TEMPLATE, 'vue')
         .replace(/(\$template)/g, readModuleFile(parentDirPath, 'vue'))
-        .replace(/(\$script)/g, readModuleFile(parentDirPath, 'js'))
+        .replace(/(\$script)/g, readModuleFile(parentDirPath, 'ts'))
         .replace(/(\$style)/g, readModuleFile(parentDirPath, 'scss'))
         .split('\r\n');
     lines.forEach((line, index) => {

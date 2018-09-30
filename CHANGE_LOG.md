@@ -1,5 +1,10 @@
 ##Change logs
 
+###1.1.0
+```
+Change Component File System.
+```
+
 ###1.0.1
 ###2018-09-21
 ```

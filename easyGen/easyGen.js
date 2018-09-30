@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const FileUtils = require('../utils/FileUtils');
 const START_TIME = Date.now();
@@ -104,20 +105,15 @@ const genComponents = () => {
     if (!FileUtils.isExist(`${dir}index.ts`)) {
       FileUtils.mkdir(dir);
       const className = parseClassName(`component-${componentPath}`);
-      FileUtils.write(`${dir}index.ts`, `import Component from './component.vue';
+      FileUtils.write(`${dir}index.ts`, `import Component from '@/.components/${componentPath}/index.vue';
 export default Component;`);
-      FileUtils.write(`${dir}component.vue`, `<template>
-  <section class="${className}"></section>
-</template>
-<script>
-  import Component from './component';
-  export default Component;
-</script>
-<style scoped="true" lang="scss">
-  @import "${relativePath(dir)}assets/scss/base";
-  .${className}{}
-</style>`);
+      FileUtils.write(`${dir}component.scss`, `@import "${relativePath(dir)}assets/scss/base";
+.${className} {}`);
+      FileUtils.write(`${dir}component.vue`, `<section class="${className}"></section>`);
       genTsFile(dir, className, true);
+      const componentTempDir = `${SRC_DIR}.components/${componentPath}/`;
+      FileUtils.mkdir(componentTempDir);
+      FileUtils.write(`${componentTempDir}index.vue`, '<script>export default {};</script>');
       console.log(`Component:${component} 创建完毕`);
     } else {
       console.log(`Component:${component} 已经存在了`);
