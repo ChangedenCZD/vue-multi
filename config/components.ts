@@ -49,27 +49,45 @@ const writeComponentFile = (componentFile: string, parentDirPath: string) => {
         const lastIndex = isDouble ? doubleLastIndex : singleLastIndex;
         const startIndex = line.lastIndexOf(isDouble ? DOUBLE : SINGLE, lastIndex - 1) + 1;
         const fullPath = line.substring(startIndex, lastIndex);
-        const fixPath = '../' + FileUtils.fixPath(path.relative(path.resolve(__dirname, '../src/.components'), path.resolve(parentDirPath, fullPath)), false);
+        const filePath = path.relative(path.resolve(__dirname, `../src/.${parentDirPath.substr(SRC_PATH.length)}`), path.resolve(parentDirPath, fullPath));
+        const fixPath = FileUtils.fixPath(filePath, false);
         lines[index] = `${line.substr(0, startIndex)}${fixPath}${line.substr(lastIndex)}`;
       }
     }
   });
   FileUtils.write(componentFile, lines.join('\r\n'));
 };
-
-
-function init() {
-  glob.sync(`${COMPONENTS_PATH}**/index.ts`).forEach((filePath: string) => {
-    const scssFile = getNewVersionComponentFilePath(filePath, 'scss');
-    if (FileUtils.isExist(scssFile)) {
-      const parentDirPath = FileUtils.fixPath(path.resolve(scssFile, '..'));
-      const componentTempDir = `${COMPONENTS_TEMP_PATH}${parentDirPath.substr(COMPONENTS_PATH.length)}`;
-      FileUtils.mkdir(componentTempDir);
-      writeComponentFile(`${componentTempDir}index.vue`, parentDirPath);
-    } else {
-      console.log(filePath, 'is old version component file system.');
-    }
+const INDEX_FILES = glob.sync(`${COMPONENTS_PATH}**/index.ts`);
+const FILES = (() => {
+  const list = [];
+  INDEX_FILES.forEach((filePath: string) => {
+    list.push(FileUtils.fixPath(path.resolve(filePath, '..')));
   });
+  return list;
+})();
+
+function gen(indexFilePath: string = '') {
+  if (indexFilePath) {
+    create(indexFilePath);
+  } else {
+    INDEX_FILES.forEach((filePath: string) => {
+      create(filePath);
+    });
+  }
 }
 
-module.exports = init;
+function create(filePath: string) {
+  const scssFile = getNewVersionComponentFilePath(filePath, 'scss');
+  if (FileUtils.isExist(scssFile)) {
+    const parentDirPath = FileUtils.fixPath(path.resolve(scssFile, '..'));
+    const componentTempDir = `${COMPONENTS_TEMP_PATH}${parentDirPath.substr(COMPONENTS_PATH.length)}`;
+    FileUtils.mkdir(componentTempDir);
+    writeComponentFile(`${componentTempDir}index.vue`, parentDirPath);
+  } else {
+    console.log(filePath, 'is old version component file system.');
+  }
+}
+
+module.exports = {
+  gen, FILES
+};

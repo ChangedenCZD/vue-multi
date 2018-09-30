@@ -1,5 +1,10 @@
 ##Change logs
 
+###1.2.0
+```
+Watch Component Files in development.
+```
+
 ###1.1.0
 ```
 Change Component File System.
