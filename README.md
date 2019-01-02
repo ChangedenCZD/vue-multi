@@ -1,3 +1,4 @@
+# 存在重大BUG，不再维护，请移步至[optimize-vue-cli](https://github.com/ChangedenCZD/optimize-vue)
 # vue-multi
 ![GitHub watchers](https://img.shields.io/github/watchers/ChangedenCZD/vue-multi.svg)
 ![GitHub stars](https://img.shields.io/github/stars/ChangedenCZD/vue-multi.svg)
